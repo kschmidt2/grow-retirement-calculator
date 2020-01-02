@@ -92,7 +92,10 @@
             </p>
     </transition>
     <p class="body-text">
-        Over time you should see an average annual growth of 5-10%, not counting inflation. <a href="https://www.moneyunder30.com/rate-of-return-for-retirement-planning">Some experts advise</a> you to use a conservative estimate of 5-6% since it’s better to end up with too much money than too little. Others say you can safely use 8%, which has been <a href="http://www.moneychimp.com/features/market_cagr.htm">roughly the compound annual growth rate of the S&P 500 since 1980</a>. 
+        Over time you should see an average annual growth of 5-10%, adjusted for inflation. <a href="https://www.cnbc.com/id/46464842">Some experts advise</a> you to use a conservative estimate of 5-6% since it’s better to end up with too much money than too little. Others say you can safely use 8%, which has been <a href="http://www.moneychimp.com/features/market_cagr.htm">roughly the compound annual growth rate of the S&P 500 since 1980</a>. 
+    </p>
+    <p class="body-text">
+        Your rate of return will also depend on the makeup of your retirement portfolio. Investments with lower risk, sure as Treasury bonds, will provide lower returns. Experts recommend <a href="https://grow.acorns.com/how-bonds-work-why-they-matter-and-how-to-include-them-in-a-portfolio/">including bonds</a> in your portfolio to balance out the risk from your stock investments.
     </p>
     <p class="body-text">
         Would you like to play it safe with a conservative estimate, take a chance on a more optimistic outlook, or use the historical average return?
@@ -100,19 +103,19 @@
     <div class="calc-input">
         <label for="annual-growth">Expected annual growth</label>
         <div class="calc-input-radio growth-radio">
-            <input type="radio" id="conservative" name="annual-growth" v-model="annualGrowth" value=".05"></input>
+            <input type="radio" id="conservative" name="annual-growth" v-model="annualGrowth" value=".09"></input>
             <label for="conservative">Conservative</label>
     
-            <input type="radio" id="average" name="annual-growth" v-model="annualGrowth" value=".06"></input>
+            <input type="radio" id="average" name="annual-growth" v-model="annualGrowth" value=".105"></input>
             <label for="average">Average</label>
     
-            <input type="radio" id="optimistic" name="annual-growth" v-model="annualGrowth" value=".08"></input>
+            <input type="radio" id="optimistic" name="annual-growth" v-model="annualGrowth" value=".115"></input>
             <label for="optimistic">Optimistic</label>
         </div>
     </div>
     <h2>How much you need</h2>
     <p class="body-text">
-        Now comes the tricky part: figuring out how much you'll need to save to live comfortably in retirement. <a href="https://grow.acorns.com/how-to-find-out-how-much-money-you-need-to-retire-comfortably/">Generally, experts say</a> you'll need 70 to 80% of your income each year to maintain your standard of living, but that isn't the case for everyone.
+        Now comes the tricky part: figuring out how much you'll need to save to live comfortably in retirement. <a href="https://grow.acorns.com/how-to-find-out-how-much-money-you-need-to-retire-comfortably/">Some experts say</a> you'll need 70 to 80% of your income each year to maintain your standard of living, while <a href="https://www.cnbc.com/id/46464842">others say</a> you'll need 80 to 90%.
     </p>
     <p class="body-text">
         Lifestyle factors and preferences will affect how much you spend during your retirement. If you're hoping to live a more active lifestyle and travel often, you should <a href="https://www.fidelity.com/viewpoints/retirement/spending-in-retirement">add six percentage points</a> to your annual budget.
@@ -121,19 +124,19 @@
         We'll start you off with an annual spending goal of 75% of your final income. You can make adjustments based on the expectations you have for your post-work years.
     </p>
     <div class="calc-input-radio">
-        <input type="radio" id="needed-60" name="retirement-income" v-model="retirementIncome" value="60"></input>
-        <label for="needed-60">60%</label>
-
-        <input type="radio" id="needed-70" name="retirement-income" v-model="retirementIncome" value="70"></input>
+        <input type="radio" id="needed-70" name="retirement-income" v-model="retirementIncome" value=".70"></input>
         <label for="needed-70">70%</label>
 
-        <input type="radio" id="needed-75" name="retirement-income" v-model="retirementIncome" value="75"></input>
+        <input type="radio" id="needed-75" name="retirement-income" v-model="retirementIncome" value=".75"></input>
         <label for="needed-75">75%</label>
 
-        <input type="radio" id="needed-80" name="retirement-income" v-model="retirementIncome" value="80"></input>
+        <input type="radio" id="needed-80" name="retirement-income" v-model="retirementIncome" value=".80"></input>
         <label for="needed-80">80%</label>
 
-        <input type="radio" id="needed-90" name="retirement-income" v-model="retirementIncome" value="90"></input>
+        <input type="radio" id="needed-85" name="retirement-income" v-model="retirementIncome" value=".85"></input>
+        <label for="needed-85">85%</label>
+
+        <input type="radio" id="needed-90" name="retirement-income" v-model="retirementIncome" value=".90"></input>
         <label for="needed-90">90%</label>
     </div>
 	<h2>Social Security</h2>
@@ -151,7 +154,21 @@
     <transition name="fade" mode="out-in"></transition>   
         <div class="results" v-if="currentAge && retirementAge && baseSalary && annualGrowth && retirementIncome && socialSecurity">
             <h2>Results</h2>
-            <b>Monthly savings goal:</b> {{savingsGoal}}
+            <p class="body-text">
+                In order to reach your retirement savings goal, you should save <b>{{ savingsGoal }}</b> per month, or <b>{{percentOfSalary}}%</b> of your current salary. If this sounds like a lot, don't fret, Grow can help you work toward that goal.
+            </p>
+            <p class="body-text">
+                <b>Take advantage of your 401(k) match:</b> If you're fortunate enough to work for a company that offers a <a href="https://grow.acorns.com/what-is-a-401k-match/">401(k) match</a>, remember that the money your company contributes counts toward your monthly savings goal. For example, if your company matches 3% of your contribution, you only need to contribute {{percentOfSalary-3}}% to reach that {{percentOfSalary}}% goal.
+            </p>
+            <p class="body-text">
+                <b>Start small: </b>If you can't save {{percentOfSalary}}% right now, start with a lower percentage and <a href="https://grow.acorns.com/making-a-small-change-can-supercharge-your-retirement-savings/">increase your contributions</a> by 1% each year till you reach your goal. And remember, as your salary increases, the percentage of your paycheck you need to save will decrease.
+            </p>
+            <p class="body-text">
+                <b>Cut back on expenses: </b>While the affect of that $5 daily latte <a href="https://grow.acorns.com/doug-boneparth-you-can-increase-your-savings-without-giving-up-coffee/">is overblown</a>, cutting back on major expenses can significantly impact your retirement savings. <a href="https://grow.acorns.com/smart-habits-super-savers-use-to-prepare-for-retirement/">"Supersavers"</a> do things like drive older cars and live in modest homes in order to reach their savings goals. Also, be sure to avoid <a href="https://grow.acorns.com/you-may-need-to-save-40-percent-your-pay-to-retire-by-65-expert-says/">lifestyle creep</a> once you start earning more money.
+            </p>
+            <p class="body-text">
+                <b>Adjust your expectations: </b> If this still seems like too large a goal, consider adjusting your retirement expectations. If you wait until age 70 to retire, your required monthly savings go down to $XXX. Or if you can live on a tigher budget in retirement by adjusting your needs to 70% of your final salary, you only need to save $XXX per month.
+            </p>
         </div>
         <div class="error-message" v-if="!currentAge && !retirementAge && !baseSalary  && !annualGrowth && !retirementIncome && socialSecurity">
             You missed a field. Go back and make sure they're all completed.

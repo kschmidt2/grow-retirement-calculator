@@ -7,33 +7,27 @@
       baseSalary: '50000',
       savingsYesNo: 'yes',
       currentSavings: '10000',
-      annualGrowth: '.06',
-      retirementIncome: '75',
+      annualGrowth: '.105',
+      retirementIncome: '.75',
       socialSecurity: '',
       totalNeeded: '',
       saveAmount: '',
-      seen: false
+      percentOfSalary: '',
+      seen: false,
+      adjustResultsByAge: '',
+      adjustResultsByPercent: ''
     },
     computed: {
       // calculator math goes here
       savingsGoal: function() {
-        // let totalNeeded = this.income * (90-this.retirementAge) * .75,
-        //     annualAmount = (totalNeeded-this.currentSavings) / (this.retirementAge-this.currentAge),
-        //     monthlyAmount = annualAmount/12;
 
-        // let results = '<p><b>Total needed:</b> $' + totalNeeded.toLocaleString(0) +  '</p><p><b>Annual amount:</b> $' + annualAmount.toLocaleString(0) + '</p><p><b>Monthly savings:</b> $' + monthlyAmount.toLocaleString(0) + '</p>';
-        // console.log(monthlyAmount)
-        
-        // return '$' + Math.round(monthlyAmount).toLocaleString();
-        console.log("hello")
+        if (this.savingsYesNo == 'no') {
+          this.currentSavings === '0';
+        }
 
-        if (this.currentAge > this.retirementAge) {
-          return "You can't retire in the past"
-        };
-      
-        if (this.retirementAge > 90) {
-          return "Congrats on discovering immortality! Why not just retire right now?"
-        };
+        console.log(this.savingsYesNo)
+
+        console.log(this.currentSavings);
       
         let P = this.currentSavings,
             r = this.annualGrowth,
@@ -47,15 +41,25 @@
 
         console.log("Retirement salary: " + finalSalary);
 
-        let totalNeeded = finalSalary * yearsNeeded;
+        let totalNeeded = finalSalary * this.retirementIncome * yearsNeeded;
         
         console.log("Total needed: " + totalNeeded);
+
+
+        if (this.savingsYesNo == 'yes') {
+          let A = P * Math.pow((1+(r/12)), 12*t);
+          console.log("A: " + A);
+          totalNeeded = totalNeeded - A;
+          console.log("Total needed adjusted: " + totalNeeded)
+        }
 
         let PMTcalc_top = totalNeeded*(r/12);
 
         let PMTcalc_bottom = Math.pow(1+(r/12), 12*t) - 1;
 
         let PMT = PMTcalc_top/PMTcalc_bottom;
+
+        this.percentOfSalary = Math.round(PMT/(this.baseSalary/12) * 100)
 
         PMT = PMT.toLocaleString(undefined,
           {'minimumFractionDigits':0,'maximumFractionDigits':0});;
@@ -66,14 +70,11 @@
 
         return results;
 
-
-          
-
-
       }
     },
     methods: {
       // functions go here
+      
     }
   })
 // }, 1000)
