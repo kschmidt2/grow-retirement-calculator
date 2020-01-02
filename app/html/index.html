@@ -43,8 +43,11 @@
         If you’re not sure what to choose, consider going with the default age of 67.
     </p>
     <div class="calc-input-radio">
-        <input type="radio" id="retirement-62" name="retirement-age" v-model="retirementAge" value="62"></input>
-        <label for="retirement-62">62</label>
+        <input type="radio" id="retirement-50" name="retirement-age" v-model="retirementAge" value="50"></input>
+        <label for="retirement-50">50</label>
+
+        <input type="radio" id="retirement-60" name="retirement-age" v-model="retirementAge" value="60"></input>
+        <label for="retirement-62">60</label>
 
         <input type="radio" id="retirement-65" name="retirement-age" v-model="retirementAge" value="65"></input>
         <label for="retirement-65">65</label>
@@ -97,13 +100,13 @@
     <div class="calc-input">
         <label for="annual-growth">Expected annual growth</label>
         <div class="calc-input-radio growth-radio">
-            <input type="radio" id="conservative" name="annual-growth" v-model="annualGrowth" value="1.05"></input>
+            <input type="radio" id="conservative" name="annual-growth" v-model="annualGrowth" value=".05"></input>
             <label for="conservative">Conservative</label>
     
-            <input type="radio" id="average" name="annual-growth" v-model="annualGrowth" value="1.06"></input>
+            <input type="radio" id="average" name="annual-growth" v-model="annualGrowth" value=".06"></input>
             <label for="average">Average</label>
     
-            <input type="radio" id="optimistic" name="annual-growth" v-model="annualGrowth" value="1.08"></input>
+            <input type="radio" id="optimistic" name="annual-growth" v-model="annualGrowth" value=".08"></input>
             <label for="optimistic">Optimistic</label>
         </div>
     </div>
@@ -158,7 +161,7 @@
     
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
   <!--build:js js/main.min.js -->
-  <script src="js/retirement-calculator_main.js"></script>
+  <script src="js/grow-retirement-calculator_main.js"></script>
   <!-- endbuild -->
 </body>
 </html>

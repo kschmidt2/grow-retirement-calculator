@@ -2,13 +2,13 @@
   var calculator = new Vue({
     el: '#calculator',
     data: {
-      currentAge: '',
-      retirementAge: '',
-      baseSalary: '',
-      savingsYesNo: '',
-      currentSavings: '',
-      annualGrowth: '',
-      retirementIncome: '',
+      currentAge: '31',
+      retirementAge: '65',
+      baseSalary: '50000',
+      savingsYesNo: 'yes',
+      currentSavings: '10000',
+      annualGrowth: '.06',
+      retirementIncome: '75',
       socialSecurity: '',
       totalNeeded: '',
       saveAmount: '',
@@ -35,53 +35,41 @@
           return "Congrats on discovering immortality! Why not just retire right now?"
         };
       
-        let lifetimeEarnings = 0,
-            salary = this.baseSalary,
-            yearsToDeath = 90 - this.retirementAge,
-            years = this.retirementAge - this.currentAge,
-            incr = 1.02;
-      
-        for (let i = 0; i < years; i++) {
-          salary = parseFloat((salary * incr).toFixed(2))
-          lifetimeEarnings += salary
-        };
-      
-        let goal = (salary * .75) * yearsToDeath;
-      
-        salary = this.baseSalary;
-      
-        let balance = this.currentSavings,
-            leftover = true,
-            basePct = .01;
-      
-        while(leftover === true && basePct <= 1) {
-          for (let i = 0; i < years; i++) {
-            balance += parseFloat((salary * basePct).toFixed(2))
-            balance += parseFloat((balance * this.annualGrowth).toFixed(2))
-            salary = parseFloat((salary * incr).toFixed(2))
-          };
-      
-          console.log(`${Math.round(basePct * 100)}% of your salary: $${parseFloat(balance)} of $${parseFloat(goal.toFixed(2))}`);
+        let P = this.currentSavings,
+            r = this.annualGrowth,
+            t = this.retirementAge - this.currentAge;
 
-          return `${Math.round(basePct * 100)}% of your salary: $${parseFloat(balance)} of $${parseFloat(goal.toFixed(2))}`
-      
-          if (goal > balance) {
-            salary = this.baseSalary
-            balance = this.currentSavings
-            basePct += .01
-          } else {
-            salary = this.baseSalary
-            balance = this.currentSavings
-            basePct -= .001
-            leftover = false
-          }
-        };
-      
-        if (basePct < 1){
-          return Math.round(basePct * 100)
-        } else {
-          return `It is impossible for you to retire at ${this.retirementAge}`
-        }
+        console.log("t: " + t)
+        
+        let finalSalary =
+            Math.pow(1.02, t) * this.baseSalary;
+        let yearsNeeded = 90 - this.retirementAge;
+
+        console.log("Retirement salary: " + finalSalary);
+
+        let totalNeeded = finalSalary * yearsNeeded;
+        
+        console.log("Total needed: " + totalNeeded);
+
+        let PMTcalc_top = totalNeeded*(r/12);
+
+        let PMTcalc_bottom = Math.pow(1+(r/12), 12*t) - 1;
+
+        let PMT = PMTcalc_top/PMTcalc_bottom;
+
+        PMT = PMT.toLocaleString(undefined,
+          {'minimumFractionDigits':0,'maximumFractionDigits':0});;
+
+        console.log("Payment: " + PMT)
+
+        let results = '$' + PMT;
+
+        return results;
+
+
+          
+
+
       }
     },
     methods: {
@@ -89,61 +77,3 @@
     }
   })
 // }, 1000)
-
-// function savingsRate(baseSalary, annualGrowth, currentAge, retirementAge, currentSavings) {
-//   if (currentAge > retirementAge) {
-//     return "You can't retire in the past"
-//   };
-
-//   if (retirementAge > 90) {
-//     return "Congrats on discovering immortality! Why not just retire right now?"
-//   };
-
-//   let lifetimeEarnings = 0,
-//       salary = baseSalary,
-//       yearsToDeath = 90 - retirementAge,
-//       years = retirementAge - currentAge,
-//       incr = 1.02;
-
-//   for (let i = 0; i < years; i++) {
-//     salary = parseFloat((salary * incr).toFixed(2))
-//     lifetimeEarnings += salary
-//   };
-
-//   let goal = (salary * .75) * yearsToDeath;
-
-//   salary = baseSalary;
-
-//   let balance = currentSavings,
-//       leftover = true,
-//       basePct = .01;
-
-//   while(leftover === true && basePct <= 1) {
-//     for (let i = 0; i < years; i++) {
-//       balance += parseFloat((salary * basePct).toFixed(2))
-//       balance += parseFloat((balance * annualGrowth).toFixed(2))
-//       salary = parseFloat((salary * incr).toFixed(2))
-//     };
-
-//     console.log(`${Math.round(basePct * 100)}% of your salary: $${parseFloat(balance.toFixed(2))} of $${parseFloat(goal.toFixed(2))}`);
-
-//     if (goal > balance) {
-//       salary = baseSalary
-//       balance = currentSavings
-//       basePct += .01
-//     } else {
-//       salary = baseSalary
-//       balance = currentSavings
-//       basePct -= .001
-//       leftover = false
-//     }
-//   };
-
-//   if (basePct < 1){
-//     return Math.round(basePct * 100)
-//   } else {
-//     return `It is impossible for you to retire at ${retirementAge}`
-//   }
-// };
-
-// savingsRate(50000,1.06,25,70,0)
