@@ -2,56 +2,63 @@
   var calculator = new Vue({
     el: '#calculator',
     data: {
-      currentAge: '31',
-      retirementAge: '67',
-      baseSalary: '50000',
-      savingsYesNo: 'yes',
-      currentSavings: '10000',
-      annualGrowth: '.105',
-      retirementIncome: '.75',
-      socialSecurity: '',
+      currentAge: '',
+      retirementAge: '',
+      baseSalary: '',
+      savingsYesNo: '',
+      currentSavings: '',
+      annualGrowth: '',
+      retirementIncome: '',
+      socialSecurity: 'no',
       totalNeeded: '',
+      A: '',
       saveAmount: '',
       percentOfSalary: '',
+      ageAdjusted: '',
+      incomeAdjusted: '',
       seen: false,
-      adjustForAge: '',
-      adjustForIncome: ''
+      showResults: false,
+      showError: false,
+      showExpectations: true
     },
     computed: {
       // calculator math goes here
+      
+    },
+    methods: {
+      // functions go here
       savingsGoal: function() {
+
+        if (this.currentAge && this.retirementAge && this.baseSalary && this.annualGrowth && this.retirementIncome && this.socialSecurity) {
+          this.showResults = true;
+          this.showError = false;
+        } else {
+          this.showError = true;
+          this.showResults = false
+        }
 
         if (this.savingsYesNo == 'no') {
           this.currentSavings === '0';
         }
-
-        console.log(this.savingsYesNo)
-
-        console.log(this.currentSavings);
       
         let P = this.currentSavings,
             r = this.annualGrowth,
             t = this.retirementAge - this.currentAge;
-
-        console.log("t: " + t)
         
         let finalSalary =
             Math.pow(1.02, t) * this.baseSalary;
         let yearsNeeded = 90 - this.retirementAge;
 
-        console.log("Retirement salary: " + finalSalary);
-
         this.totalNeeded = finalSalary * this.retirementIncome * yearsNeeded;
-        
-        console.log("Total needed: " + this.totalNeeded);
-
 
         if (this.savingsYesNo == 'yes') {
-          let A = P * Math.pow((1+(r/12)), 12*t);
-          console.log("A: " + A);
-          this.totalNeeded = this.totalNeeded - A;
+          this.A = P * Math.pow((1+(r/12)), 12*t);
+          console.log("A: " + this.A);
+          this.totalNeeded = this.totalNeeded - this.A;
           console.log("Total needed adjusted: " + this.totalNeeded)
         }
+
+        console.log(t)
 
         let PMTcalc_top = this.totalNeeded*(r/12);
 
@@ -66,31 +73,56 @@
 
         console.log("Payment: " + PMT)
 
-        let results = '$' + PMT;
+        this.saveAmount = '$' + PMT;
 
-        function adjustForAge() {
-          console.log(this.retirementAge)
-          if (this.retirementAge !== '70') {
-            t = 70 - this.currentAge;
-            this.adjustForAge = "$XXX";
-            console.log(this.adjustForAge)
+        this.adjustForAge(P, r);
+        this.adjustForIncome(P, r, finalSalary, t, yearsNeeded);
+
+
+      },
+      adjustForAge: function(P, r) {
+        if (this.retirementAge == '70' && this.retirementIncome == '.70') {
+          this.showExpectations=false;
+        } else if (this.retirementAge !== '70') {
+            let tA = 70 - this.currentAge;
+            let finalSalaryA = Math.pow(1.02, tA) * this.baseSalary;
+            let adjustedTotalNeeded = finalSalaryA * this.retirementIncome * 20;
+            if (this.savingsYesNo == 'yes') {
+              let aA = P * Math.pow((1+(r/12)), 12*tA);
+              adjustedTotalNeeded = adjustedTotalNeeded - aA;
+            }
+            let PMTcalc_top2 = adjustedTotalNeeded*(r/12);
+
+            let PMTcalc_bottom2 = Math.pow(1+(r/12), 12*tA) - 1;
+
+            let PMT2 = PMTcalc_top2/PMTcalc_bottom2;
+
+            PMT2 = PMT2.toLocaleString(undefined,
+              {'minimumFractionDigits':0,'maximumFractionDigits':0});;
+            this.ageAdjusted = "If you wait until age 70 to retire, your required monthly savings go down to $" + PMT2 + ".";
           } else if (this.retirementAge == '70') {
-            this.adjustForAge = "Hello";
-            console.log(this.adjustForAge)
+            this.ageAdjusted = " ";
           }
+      },
+      adjustForIncome: function(P, r, finalSalary, t, yearsNeeded) {
+        if (this.retirementIncome !== ".70") {
+            let adjustedTotalNeeded2 = finalSalary * 0.7 * yearsNeeded;
+            if (this.savingsYesNo == 'yes') {
+              let iA = P * Math.pow((1+(r/12)), 12*t);
+              adjustedTotalNeeded2 = adjustedTotalNeeded2 - iA;
+            }
+            let PMTcalc_top3 = adjustedTotalNeeded2*(r/12);
+
+            let PMTcalc_bottom3 = Math.pow(1+(r/12), 12*t) - 1;
+
+            let PMT3 = PMTcalc_top3/PMTcalc_bottom3;
+
+            PMT3 = PMT3.toLocaleString(undefined,
+              {'minimumFractionDigits':0,'maximumFractionDigits':0});;
+          this.incomeAdjusted = "If you can live on a tighter budget in retirement by adjusting your needs to 70% of your final salary, you only need to save $" + PMT3 + " per month"
+        } else {
+          this.incomeAdjusted = ""
         }
-
-        adjustForAge();
-
-        return results;
-
-      }
-    },
-    methods: {
-      // functions go here
-      adjustForAge: function() {
-        // return "Hello"
-        console.log("adjust for age")
       }
     }
   })

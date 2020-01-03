@@ -11,7 +11,7 @@
 
   <!--build:css css/styles.min.css-->
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
-  <link rel="stylesheet" href="css/retirement-calculator_styles.css">
+  <link rel="stylesheet" href="css/grow-retirement-calculator_styles.css">
   <!--endbuild-->
 
 </head>
@@ -151,14 +151,16 @@
         <label for="ss-no">No</label>
     </div>
 
+    <button v-on:click="savingsGoal">submit</button>
+
     <transition name="fade" mode="out-in"></transition>   
-        <div class="results" v-if="currentAge && retirementAge && baseSalary && annualGrowth && retirementIncome && socialSecurity">
+        <div class="results" v-if="showResults==true">
             <h2>Results</h2>
             <p class="body-text">
-                Your retirement savings goal is <b>${{(Math.round(totalNeeded)).toLocaleString()}}</b>.
+                Your retirement savings goal is <b>${{(Math.round(totalNeeded + A)).toLocaleString()}}</b>.
             </p>
             <p class="body-text">
-                In order to reach your retirement savings goal, you should save <b>{{ savingsGoal }}</b> per month, or <b>{{percentOfSalary}}%</b> of your current salary. If this sounds like a lot, don't fret, Grow can help you work toward that goal.
+                In order to reach your retirement savings goal, you should save <b>{{saveAmount}}</b> per month, or <b>{{percentOfSalary}}%</b> of your current salary. If this sounds like a lot, don't fret, Grow can help you work toward that goal.
             </p>
             <p class="body-text">
                 <b>Take advantage of your 401(k) match:</b> If you're fortunate enough to work for a company that offers a <a href="https://grow.acorns.com/what-is-a-401k-match/">401(k) match</a>, remember that the money your company contributes counts toward your monthly savings goal. For example, if your company matches 3% of your contribution, you only need to contribute {{percentOfSalary-3}}% to reach that {{percentOfSalary}}% goal.
@@ -169,11 +171,11 @@
             <p class="body-text">
                 <b>Cut back on expenses: </b>While the affect of that $5 daily latte <a href="https://grow.acorns.com/doug-boneparth-you-can-increase-your-savings-without-giving-up-coffee/">is overblown</a>, cutting back on major expenses can significantly impact your retirement savings. <a href="https://grow.acorns.com/smart-habits-super-savers-use-to-prepare-for-retirement/">"Supersavers"</a> do things like drive older cars and live in modest homes in order to reach their savings goals. Also, be sure to avoid <a href="https://grow.acorns.com/you-may-need-to-save-40-percent-your-pay-to-retire-by-65-expert-says/">lifestyle creep</a> once you start earning more money.
             </p>
-            <p class="body-text">
-                <b>Adjust your expectations: </b> If this still seems like too large a goal, consider adjusting your retirement expectations. If you wait until age 70 to retire, your required monthly savings go down to {{adjustForAge}}. Or if you can live on a tigher budget in retirement by adjusting your needs to 70% of your final salary, you only need to save $XXX per month.
+            <p class="body-text" v-if="showExpectations==true">
+                <b>Adjust your expectations: </b> If this still seems like too large a goal, consider adjusting your retirement expectations. {{ageAdjusted}} {{incomeAdjusted}}
             </p>
         </div>
-        <div class="error-message" v-if="!currentAge && !retirementAge && !baseSalary  && !annualGrowth && !retirementIncome && socialSecurity">
+        <div class="error-message" v-if="showError==true">
             You missed a field. Go back and make sure they're all completed.
         </div>
     </transition>
