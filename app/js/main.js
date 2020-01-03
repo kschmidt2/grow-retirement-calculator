@@ -3,7 +3,7 @@
     el: '#calculator',
     data: {
       currentAge: '31',
-      retirementAge: '65',
+      retirementAge: '67',
       baseSalary: '50000',
       savingsYesNo: 'yes',
       currentSavings: '10000',
@@ -14,8 +14,8 @@
       saveAmount: '',
       percentOfSalary: '',
       seen: false,
-      adjustResultsByAge: '',
-      adjustResultsByPercent: ''
+      adjustForAge: '',
+      adjustForIncome: ''
     },
     computed: {
       // calculator math goes here
@@ -41,19 +41,19 @@
 
         console.log("Retirement salary: " + finalSalary);
 
-        let totalNeeded = finalSalary * this.retirementIncome * yearsNeeded;
+        this.totalNeeded = finalSalary * this.retirementIncome * yearsNeeded;
         
-        console.log("Total needed: " + totalNeeded);
+        console.log("Total needed: " + this.totalNeeded);
 
 
         if (this.savingsYesNo == 'yes') {
           let A = P * Math.pow((1+(r/12)), 12*t);
           console.log("A: " + A);
-          totalNeeded = totalNeeded - A;
-          console.log("Total needed adjusted: " + totalNeeded)
+          this.totalNeeded = this.totalNeeded - A;
+          console.log("Total needed adjusted: " + this.totalNeeded)
         }
 
-        let PMTcalc_top = totalNeeded*(r/12);
+        let PMTcalc_top = this.totalNeeded*(r/12);
 
         let PMTcalc_bottom = Math.pow(1+(r/12), 12*t) - 1;
 
@@ -68,13 +68,30 @@
 
         let results = '$' + PMT;
 
+        function adjustForAge() {
+          console.log(this.retirementAge)
+          if (this.retirementAge !== '70') {
+            t = 70 - this.currentAge;
+            this.adjustForAge = "$XXX";
+            console.log(this.adjustForAge)
+          } else if (this.retirementAge == '70') {
+            this.adjustForAge = "Hello";
+            console.log(this.adjustForAge)
+          }
+        }
+
+        adjustForAge();
+
         return results;
 
       }
     },
     methods: {
       // functions go here
-      
+      adjustForAge: function() {
+        // return "Hello"
+        console.log("adjust for age")
+      }
     }
   })
 // }, 1000)
