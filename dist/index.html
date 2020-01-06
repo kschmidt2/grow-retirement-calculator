@@ -26,7 +26,7 @@
         We’ve put together a tool that can help you estimate how much you’ll need and can help you get started on a plan.
     </p>
     <p class="body-text">
-        Follow along and enter your information below to get a personalized savings goal. 
+        Follow along and enter your information below to get a personalized savings goal. If you are planning for yourself and a partner, you'll want to input household, not individual, numbers.
     </p>
     <h2>Basic information</h2>
     <p class="body-text">
@@ -46,7 +46,7 @@
         <input type="radio" id="retirement-50" name="retirement-age" v-model="retirementAge" value="50"></input>
         <label for="retirement-50">50</label>
 
-        <input type="radio" id="retirement-60" name="retirement-age" v-model="retirementAge" value="60"></input>
+        <input type="radio" id="retirement-62" name="retirement-age" v-model="retirementAge" value="62"></input>
         <label for="retirement-62">60</label>
 
         <input type="radio" id="retirement-65" name="retirement-age" v-model="retirementAge" value="65"></input>
@@ -60,7 +60,7 @@
     </div>
     <h2>Income</h2>
     <p class="body-text">
-        How much money you make will determine how much you’ll need to maintain your standard of living in retirement, as well as how much of your income you should contribute to a 401(k) or other savings plan.
+        How much money you make will determine how much you’ll need to maintain your standard of living in retirement, as well as how much of your income you should contribute to a 401(k) or other savings plan. 
     </p>
     <div class="calc-input money-input">
         <label for="base-salary">Current income</label>
@@ -68,7 +68,7 @@
     </div>
     <h2>Savings & growth</h2>
     <p class="body-text">
-        Do you currently have any retirement savings?
+        Do you currently have savings in any retirement accounts?
     </p>
     <div class="calc-input-radio">
         <input type="radio" id="savings-yes" name="savings-yes-no" v-model="savingsYesNo" value="yes"></input>
@@ -80,7 +80,7 @@
     <transition name="fade" mode="out-in">
         <div v-if="savingsYesNo === 'yes'" key="yes">
             <p class="body-text" style="margin-top:-20px">
-                    Great! Enter the amount below so we know what you’re starting with.
+                    Great! Enter the amount below so we know what you’re starting with. If you're not sure how much you have, estimate as best you can.
             </p>
             <div class="calc-input money-input">
                 <label for="current-savings">Current retirement savings</label>
@@ -103,13 +103,13 @@
     <div class="calc-input">
         <label for="annual-growth">Expected annual growth</label>
         <div class="calc-input-radio growth-radio">
-            <input type="radio" id="conservative" name="annual-growth" v-model="annualGrowth" value=".09"></input>
+            <input type="radio" id="conservative" name="annual-growth" v-model="annualGrowth" value=".064"></input>
             <label for="conservative">Conservative</label>
     
-            <input type="radio" id="average" name="annual-growth" v-model="annualGrowth" value=".105"></input>
+            <input type="radio" id="average" name="annual-growth" v-model="annualGrowth" value=".074"></input>
             <label for="average">Average</label>
     
-            <input type="radio" id="optimistic" name="annual-growth" v-model="annualGrowth" value=".115"></input>
+            <input type="radio" id="optimistic" name="annual-growth" v-model="annualGrowth" value=".084"></input>
             <label for="optimistic">Optimistic</label>
         </div>
     </div>
@@ -118,7 +118,7 @@
         Now comes the tricky part: figuring out how much you'll need to save to live comfortably in retirement. <a href="https://grow.acorns.com/how-to-find-out-how-much-money-you-need-to-retire-comfortably/">Some experts say</a> you'll need 70 to 80% of your income each year to maintain your standard of living, while <a href="https://www.cnbc.com/id/46464842">others say</a> you'll need 80 to 90%.
     </p>
     <p class="body-text">
-        Lifestyle factors and preferences will affect how much you spend during your retirement. If you're hoping to live a more active lifestyle and travel often, you should <a href="https://www.fidelity.com/viewpoints/retirement/spending-in-retirement">add six percentage points</a> to your annual budget.
+        Lifestyle factors and preferences will effect how much you spend during your retirement. If you're hoping to live a more active lifestyle and travel often, you should <a href="https://www.fidelity.com/viewpoints/retirement/spending-in-retirement">add six percentage points</a> to your annual budget.
     </p>
     <p class="body-text">
         We'll start you off with an annual spending goal of 75% of your final income. You can make adjustments based on the expectations you have for your post-work years.
@@ -139,17 +139,6 @@
         <input type="radio" id="needed-90" name="retirement-income" v-model="retirementIncome" value=".90"></input>
         <label for="needed-90">90%</label>
     </div>
-	<h2>Social Security</h2>
-    <p class="body-text">
-        Finally, do you want to factor in your estimated Social Security payments?
-    </p>
-    <div class="calc-input-radio">
-        <input type="radio" id="ss-yes" name="social-security" v-model="socialSecurity" value="yes"></input>
-        <label for="ss-yes">Yes</label>
-
-        <input type="radio" id="ss-no" name="social-security" v-model="socialSecurity" value="no"></input>
-        <label for="ss-no">No</label>
-    </div>
 
     <button v-on:click="savingsGoal">submit</button>
 
@@ -157,10 +146,10 @@
         <div class="results" v-if="showResults==true">
             <h2>Results</h2>
             <p class="body-text">
-                Your retirement savings goal is <b>${{(Math.round(totalNeeded + A)).toLocaleString()}}</b>.
+                Your estimated retirement savings goal is <b>${{(Math.round(totalNeeded + A)).toLocaleString()}}</b>.
             </p>
             <p class="body-text">
-                In order to reach your retirement savings goal, you should save <b>{{saveAmount}}</b> per month, or <b>{{percentOfSalary}}%</b> of your current salary. If this sounds like a lot, don't fret, Grow can help you work toward that goal.
+                In order to reach your retirement savings goal, you should save <b>{{saveAmount}}</b> per month, or <b>{{percentOfSalary}}%</b> of your current salary. If this sounds like a lot, don't fret. Grow can help you work toward that goal.
             </p>
             <p class="body-text">
                 <b>Take advantage of your 401(k) match:</b> If you're fortunate enough to work for a company that offers a <a href="https://grow.acorns.com/what-is-a-401k-match/">401(k) match</a>, remember that the money your company contributes counts toward your monthly savings goal. For example, if your company matches 3% of your contribution, you only need to contribute {{percentOfSalary-3}}% to reach that {{percentOfSalary}}% goal.
@@ -174,11 +163,31 @@
             <p class="body-text" v-if="showExpectations==true">
                 <b>Adjust your expectations: </b> If this still seems like too large a goal, consider adjusting your retirement expectations. {{ageAdjusted}} {{incomeAdjusted}}
             </p>
+            <p class="body-text">
+                Remember, this result is just an estimate based on your current circumstances and investment growth projections. It also does not factor in any Social Security payments you may receive.
+            </p>
+            <h2>
+                Additional retirement resources from Grow:
+            </h2>
+            <ul>
+                <li><a href="https://grow.acorns.com/how-to-find-out-how-much-money-you-need-to-retire-comfortably/">How to figure out how much money you need to retire comfortably</a></li>
+                <li><a href="https://grow.acorns.com/save-more-money-for-retirement-by-making-this-mental-shift/">Making an easy mental shift can motivate you to save more for retirement</a></li>
+                <li><a href="https://grow.acorns.com/saving-instead-of-investing-for-retirement-is-an-expensive-mistake/">53% of people saving for retirement are making the same mistake</a></li>
+                <li><a href="https://grow.acorns.com/how-to-save-for-retirement-when-you-dont-have-a-9-5/">How to save for retirement when you don’t have a 9-5</a></li>
+            </ul>
         </div>
         <div class="error-message" v-if="showError==true">
             You missed a field. Go back and make sure they're all completed.
         </div>
+        <div class="error-message" v-if="showAgeError==true">
+            You can't retire in the past. Go back and select a retirement age higher than your current age.
+        </div>
     </transition>
+
+    <p class="body-text notes">
+        <b>Notes:</b>  This calculator makes a few estimates for future earnings and growth. It assumes annual 3% salary increases until age 54 and annual 1.5% increases from age 55 to retirement, based on <a href="https://www.frbatlanta.org/chcs/wage-growth-tracker">historical wage growth</a>. Following the <a href="https://www.cnbc.com/2019/06/18/rick-santellis-5-things-you-need-to-know-about-investing-in-bonds.html">"60-40 rule,"</a>annual growth is based on a portfolio made up of 60% stocks and 40% bonds.  Rates used for annual growth are: 6.4% (conservative), 7.4% (average), and 8.4% (optimistic), based on <a href="https://www.morningstar.com/articles/907378/experts-forecast-long-term-stock-and-bond-returns-2019-edition">long-term historical returns</a>. Annual growth calculated until retirement age. Social Security and pension payments are not factored into the results. Selected retirement ages are based on <a href="https://www.ssa.gov/planners/retire/agereduction.html">Social Security milestones</a>. The age of 50 is included to allow for a greater range of results. Total needed is based on a life expectancy of 90.
+    </p>
+
   </div>
     
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>

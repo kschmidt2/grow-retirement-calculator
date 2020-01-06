@@ -9,7 +9,6 @@
       currentSavings: '',
       annualGrowth: '',
       retirementIncome: '',
-      socialSecurity: 'no',
       totalNeeded: '',
       A: '',
       saveAmount: '',
@@ -19,6 +18,7 @@
       seen: false,
       showResults: false,
       showError: false,
+      showAgeError: false,
       showExpectations: true
     },
     computed: {
@@ -29,12 +29,17 @@
       // functions go here
       savingsGoal: function() {
 
-        if (this.currentAge && this.retirementAge && this.baseSalary && this.annualGrowth && this.retirementIncome && this.socialSecurity) {
+        if (this.currentAge && this.retirementAge && this.baseSalary && this.annualGrowth && this.retirementIncome) {
           this.showResults = true;
           this.showError = false;
         } else {
           this.showError = true;
-          this.showResults = false
+          this.showResults = false;
+        }
+
+        if (this.currentAge > this.retirementAge) {
+          this.showResults = false;
+          this.showAgeError = true;
         }
 
         if (this.savingsYesNo == 'no') {
@@ -43,11 +48,21 @@
       
         let P = this.currentSavings,
             r = this.annualGrowth,
-            t = this.retirementAge - this.currentAge;
+            t = this.retirementAge - this.currentAge
+            tW = (54 - this.currentAge)/t,
+            tW2 = (this.retirementAge - 54)/t;
+
+            console.log("tW: " + tW + " tW2: " + tW2);
+
+        let weightedAverage = (tW*.03 + tW2*.015)+1;
+
+        console.log("weighted average: " + weightedAverage)
         
         let finalSalary =
-            Math.pow(1.02, t) * this.baseSalary;
+            Math.pow(weightedAverage, t) * this.baseSalary;
         let yearsNeeded = 90 - this.retirementAge;
+
+        console.log("final salary: " + finalSalary)
 
         this.totalNeeded = finalSalary * this.retirementIncome * yearsNeeded;
 
