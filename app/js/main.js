@@ -31,9 +31,11 @@
         if (this.currentAge && this.retirementAge && this.baseSalary && this.annualGrowth && this.retirementIncome) {
           this.showResults = true;
           this.showError = false;
+          this.showAgeError = false;
         } else {
           this.showError = true;
           this.showResults = false;
+          this.showAgeError = false;
         }
 
         if (this.currentAge > this.retirementAge) {
