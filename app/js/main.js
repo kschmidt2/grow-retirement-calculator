@@ -2,13 +2,13 @@
   var calculator = new Vue({
     el: '#calculator',
     data: {
-      currentAge: '25',
-      retirementAge: '65',
-      baseSalary: '50000',
+      currentAge: '',
+      retirementAge: '',
+      baseSalary: '',
       savingsYesNo: '',
       currentSavings: '',
-      annualGrowth: '.074',
-      retirementIncome: '.80',
+      annualGrowth: '',
+      retirementIncome: '',
       totalNeeded: '',
       A: '',
       saveAmount: '',
