@@ -2,13 +2,13 @@
   var calculator = new Vue({
     el: '#calculator',
     data: {
-      currentAge: '',
-      retirementAge: '',
-      baseSalary: '',
+      currentAge: '25',
+      retirementAge: '65',
+      baseSalary: '50000',
       savingsYesNo: '',
       currentSavings: '',
-      annualGrowth: '',
-      retirementIncome: '',
+      annualGrowth: '.074',
+      retirementIncome: '.80',
       totalNeeded: '',
       A: '',
       saveAmount: '',
@@ -22,8 +22,7 @@
       showExpectations: true
     },
     computed: {
-      // calculator math goes here
-      
+
     },
     methods: {
       // functions go here
@@ -64,7 +63,19 @@
 
         console.log("final salary: " + finalSalary)
 
-        this.totalNeeded = finalSalary * this.retirementIncome * yearsNeeded;
+        let annualIncome = finalSalary * this.retirementIncome;
+
+        console.log("annual income: " + annualIncome)
+
+        this.totalNeeded = 0;
+
+        for (i=0; i < yearsNeeded; i++) {
+          this.totalNeeded = (this.totalNeeded/(Math.pow(1+(.04/12),12))) + annualIncome;
+        }
+
+        console.log("total needed: " + this.totalNeeded)
+
+        console.log(P)
 
         if (this.savingsYesNo == 'yes') {
           this.A = P * Math.pow((1+(r/12)), 12*t);
@@ -72,6 +83,7 @@
           this.totalNeeded = this.totalNeeded - this.A;
           console.log("Total needed adjusted: " + this.totalNeeded)
         }
+
 
         console.log(t)
 
