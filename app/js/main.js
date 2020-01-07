@@ -133,7 +133,11 @@
       },
       adjustForIncome: function(P, r, finalSalary, t, yearsNeeded) {
         if (this.retirementIncome !== ".70") {
-            let adjustedTotalNeeded2 = finalSalary * 0.7 * yearsNeeded;
+            let adjustedAnnualIncome = finalSalary * 0.7;
+            let adjustedTotalNeeded2 = 0;
+            for (i=0; i < yearsNeeded; i++) {
+              adjustedTotalNeeded2 = (adjustedTotalNeeded2/(Math.pow(1+(.04/12),12))) + adjustedAnnualIncome;
+            }
             if (this.savingsYesNo == 'yes') {
               let iA = P * Math.pow((1+(r/12)), 12*t);
               adjustedTotalNeeded2 = adjustedTotalNeeded2 - iA;
