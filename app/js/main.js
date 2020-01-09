@@ -27,7 +27,9 @@
       showResults: false,
       showError: false,
       showAgeError: false,
-      showExpectations: true
+      showExpectations: true,
+      showSavings: true,
+      showOnTrack: false
     },
     computed: {
 
@@ -36,7 +38,7 @@
       // functions go here
       savingsGoal: function() {
 
-        shows results or error based on input
+        // shows results or error based on input
         if (this.currentAge && this.retirementAge && this.baseSalary && this.annualGrowth && this.retirementIncome) {
           this.showResults = true;
           this.showError = false;
@@ -105,6 +107,18 @@
 
         this.saveAmount = '$' + PMT;
 
+        console.log(PMT)
+
+        if (PMT.charAt(0) == '-' || PMT.charAt(0) == '0') {
+          this.showSavings = false;
+          this.showOnTrack = true;
+          this.showExpectations = false;
+        } else {
+          this.showSavings = true;
+          this.showOnTrack = false;
+          this.showExpectations = true;
+        }
+
         this.adjustForAge(P, r);
         this.adjustForIncome(P, r, finalSalary, t, yearsNeeded);
 
@@ -163,9 +177,7 @@
 
           PMT3 = PMT3.toLocaleString(undefined,
             {'minimumFractionDigits':0,'maximumFractionDigits':0});
-
           this.incomeAdjusted = "If you can live on a tighter budget in retirement by adjusting your needs to 70% of your final salary, you only need to save $" + PMT3 + " per month."
-        
         } else {
           this.incomeAdjusted = "" // doesn't display section if income needed is already 70%
         }

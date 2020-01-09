@@ -32,7 +32,7 @@ $breakpoint-lg: 717px;
   font-size: 18px;
 
   b {
-    font-weight: 600;
+    font-weight: 700;
   }
 
   h2 {
@@ -133,6 +133,8 @@ $breakpoint-lg: 717px;
       }
       @include x-small {
         padding: 12px 16px 12px 30px;
+        margin-bottom: 10px;
+        width: 100%;
       }
     }
     &.growth-radio label {
@@ -191,6 +193,7 @@ $breakpoint-lg: 717px;
 
   & .error-message {
     font-style: italic;
+    line-height: 1.5;
   }
 
   .fade-enter-active, .fade-leave-active {

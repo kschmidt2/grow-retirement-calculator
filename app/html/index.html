@@ -20,13 +20,16 @@
 
   <div id="calculator">
     <p class="body-text">
-        So you want to be a millionaire? That may seem impossible, but based on Grow calculations, that’s how much most 25-year-olds today may need to retire comfortably. If you haven’t already begun saving and investing, the time to start working toward that goal is now. Luckily, the sooner you begin, the easier it is to build wealth for the future.
+        So you want to be a millionaire? That may seem daunting, but based on Grow calculations, a million dollars, or more, is what most 25-year-olds today may need to retire comfortably. 
+    </p>
+    <p class="body-text">
+        If you haven’t already begun saving and investing, the time to start working toward that goal is now. Luckily, the sooner you begin, the easier it is to build wealth for the future.
     </p>
     <p class="body-text">
         We’ve put together a tool that can help you estimate how much you’ll need and can help you get started on a plan.
     </p>
     <p class="body-text">
-        Follow along and enter your information below to get a personalized savings goal. If you are planning for yourself and a partner, you'll want to input household, not individual, numbers.
+        Follow along and enter your information below to get a personalized savings goal. If you are planning for yourself and a partner, you'll want to input household numbers rather than individual ones.
     </p>
     <h2>Basic information</h2>
     <p class="body-text">
@@ -37,7 +40,7 @@
         <input type="number" name="current-age" v-model.number="currentAge"></input>
     </div>
     <p class="body-text">
-        While the current average retirement age among retirees is <a href="https://dqydj.com/average-retirement-age-in-the-united-states/">about 60 years old</a>, that’s expected to increase for younger generations. Americans born in 1960 or later can access partial Social Security benefits at age 62 and full benefits at age 67. Some experts recommend <a href="https://www.cnbc.com/2018/01/30/suze-orman-and-stanford-research-agree-70-is-the-new-retirement-age.html">holding off on collecting until age 70</a> because Americans are living longer, meaning your savings need to last longer.
+        While the current average retirement age among retirees is <a href="https://dqydj.com/average-retirement-age-in-the-united-states/">about 60 years old</a>, that’s expected to increase for younger generations. Americans born in 1960 or later can access partial Social Security benefits at age 62 and full benefits at age 67. Some experts recommend <a href="https://www.cnbc.com/2018/01/30/suze-orman-and-stanford-research-agree-70-is-the-new-retirement-age.html">holding off on retiring until age 70</a> because Americans are living longer, meaning your savings need to last longer.
     </p>
     <p class="body-text">
         If you’re not sure what to choose, consider going with the default age of 67.
@@ -47,7 +50,7 @@
         <label for="retirement-50">50</label>
 
         <input type="radio" id="retirement-62" name="retirement-age" v-model="retirementAge" value="62"></input>
-        <label for="retirement-62">60</label>
+        <label for="retirement-62">62</label>
 
         <input type="radio" id="retirement-65" name="retirement-age" v-model="retirementAge" value="65"></input>
         <label for="retirement-65">65</label>
@@ -60,7 +63,7 @@
     </div>
     <h2>Income</h2>
     <p class="body-text">
-        How much money you make will determine how much you’ll need to maintain your standard of living in retirement, as well as how much of your income you should contribute to a 401(k) or other savings plan. 
+        How much money you make will determine how much you’ll need to maintain your standard of living in retirement, as well as how much of your income you should contribute to a 401(k) or other investment vehicle. 
     </p>
     <div class="calc-input money-input">
         <label for="base-salary">Current income</label>
@@ -95,7 +98,7 @@
         Over time you should see an average annual growth of 5-10%, adjusted for inflation. <a href="https://www.cnbc.com/id/46464842">Some experts advise</a> you to use a conservative estimate of 5-6% since it’s better to end up with too much money than too little. Others say you can safely use 8%, which has been <a href="http://www.moneychimp.com/features/market_cagr.htm">roughly the compound annual growth rate of the S&P 500 since 1980</a>. 
     </p>
     <p class="body-text">
-        Your rate of return will also depend on the makeup of your retirement portfolio. Investments with lower risk, sure as Treasury bonds, will provide lower returns. Experts recommend <a href="https://grow.acorns.com/how-bonds-work-why-they-matter-and-how-to-include-them-in-a-portfolio/">including bonds</a> in your portfolio to balance out the risk from your stock investments.
+        Your rate of return will also depend on the makeup of your retirement portfolio. Investments with lower risk, sure as Treasury bonds, will provide lower returns. Experts recommend to make sure your portfolio is diversified and <a href="https://grow.acorns.com/how-bonds-work-why-they-matter-and-how-to-include-them-in-a-portfolio/">includes both stocks and bonds</a>.
     </p>
     <p class="body-text">
         Would you like to play it safe with a conservative estimate, take a chance on a more optimistic outlook, or use the historical average return?
@@ -115,13 +118,13 @@
     </div>
     <h2>How much you need</h2>
     <p class="body-text">
-        Now comes the tricky part: figuring out how much you'll need to save to live comfortably in retirement. <a href="https://grow.acorns.com/how-to-find-out-how-much-money-you-need-to-retire-comfortably/">Some experts say</a> you'll need 70 to 80% of your income each year to maintain your standard of living, while <a href="https://www.cnbc.com/id/46464842">others say</a> you'll need 80 to 90%.
+        Now comes the tricky part: Figuring out how much you'll need to save to live comfortably in retirement. <a href="https://grow.acorns.com/how-to-find-out-how-much-money-you-need-to-retire-comfortably/">Some experts say</a> you'll need 70% to 80% of your income each year to maintain your standard of living, while <a href="https://www.cnbc.com/id/46464842">others say</a> you'll need 80% to 90%.
     </p>
     <p class="body-text">
-        Lifestyle factors and preferences will effect how much you spend during your retirement. If you're hoping to live a more active lifestyle and travel often, you should <a href="https://www.fidelity.com/viewpoints/retirement/spending-in-retirement">add six percentage points</a> to your annual budget.
+        Lifestyle factors and preferences will affect how much you spend during your retirement. If you're hoping to live a more active lifestyle and travel often, experts say <a href="https://www.fidelity.com/viewpoints/retirement/spending-in-retirement">add six percentage points</a> to your annual budget.
     </p>
     <p class="body-text">
-        We'll start you off with an annual spending goal of 75% of your final income. You can make adjustments based on the expectations you have for your post-work years.
+        We'll start you off with an annual spending goal of 75% of your final income. You can make adjustments based on the expectations you have for your later years.
     </p>
     <div class="calc-input-radio">
         <input type="radio" id="needed-70" name="retirement-income" v-model="retirementIncome" value=".70"></input>
@@ -148,17 +151,20 @@
             <p class="body-text">
                 Your estimated retirement savings goal is <b>${{(Math.round(totalNeeded + A)).toLocaleString()}}</b>.
             </p>
-            <p class="body-text">
+            <p class="body-text" v-if="showSavings==true">
                 In order to reach your retirement savings goal, you should save <b>{{saveAmount}}</b> per month, or <b>{{percentOfSalary}}%</b> of your current salary. If this sounds like a lot, don't fret. Grow can help you work toward that goal.
             </p>
-            <p class="body-text">
+            <p class="body-text" v-if="showOnTrack==true">
+                Good news! Given the assumed annual growth, it looks like you have enough saved to retire at your selected age. But it's still smart to keep saving and go over your plan with a financial pro. Unexpected events like a layoff or an economic downturn could change your goal or the steps needed to reach it.
+            </p>
+            <p class="body-text" v-if="showSavings==true">
                 <b>Take advantage of your 401(k) match:</b> If you're fortunate enough to work for a company that offers a <a href="https://grow.acorns.com/what-is-a-401k-match/">401(k) match</a>, remember that the money your company contributes counts toward your monthly savings goal. For example, if your company matches 3% of your contribution, you only need to contribute {{percentOfSalary-3}}% to reach that {{percentOfSalary}}% goal.
             </p>
-            <p class="body-text">
-                <b>Start small: </b>If you can't save {{percentOfSalary}}% right now, start with a lower percentage and <a href="https://grow.acorns.com/making-a-small-change-can-supercharge-your-retirement-savings/">increase your contributions</a> by 1% each year till you reach your goal. And remember, as your salary increases, the percentage of your paycheck you need to save will decrease.
+            <p class="body-text" v-if="showSavings==true">
+                <b>Start small: </b>If you can't save {{percentOfSalary}}% right now, start with a lower percentage and <a href="https://grow.acorns.com/making-a-small-change-can-supercharge-your-retirement-savings/">increase your contributions</a> by 1% each year until you reach your goal. And remember, as your salary increases, the percentage of your paycheck you need to save will decrease.
             </p>
-            <p class="body-text">
-                <b>Cut back on expenses: </b>While the affect of that $5 daily latte <a href="https://grow.acorns.com/doug-boneparth-you-can-increase-your-savings-without-giving-up-coffee/">is overblown</a>, cutting back on major expenses can significantly impact your retirement savings. <a href="https://grow.acorns.com/smart-habits-super-savers-use-to-prepare-for-retirement/">"Supersavers"</a> do things like drive older cars and live in modest homes in order to reach their savings goals. Also, be sure to avoid <a href="https://grow.acorns.com/you-may-need-to-save-40-percent-your-pay-to-retire-by-65-expert-says/">lifestyle creep</a> once you start earning more money.
+            <p class="body-text" v-if="showSavings==true">
+                <b>Cut back: </b>While the impact of spending $5 on a daily latte instead of saving it <a href="https://grow.acorns.com/doug-boneparth-you-can-increase-your-savings-without-giving-up-coffee/">is, some say, overblown</a>, cutting back on major expenses can significantly affect your retirement savings. <a href="https://grow.acorns.com/smart-habits-super-savers-use-to-prepare-for-retirement/">"Supersavers"</a> tend to drive older cars and live in more modest homes in order to reach their savings goals. Also, be sure to avoid <a href="https://grow.acorns.com/you-may-need-to-save-40-percent-your-pay-to-retire-by-65-expert-says/">lifestyle creep</a> once you start earning more money.
             </p>
             <p class="body-text" v-if="showExpectations==true">
                 <b>Adjust your expectations: </b> If this still seems like too large a goal, consider adjusting your retirement expectations. {{ageAdjusted}} {{incomeAdjusted}}
@@ -185,7 +191,7 @@
     </transition>
 
     <p class="body-text notes">
-        <b>Notes:</b>  This calculator makes a few estimates for future earnings and growth. It assumes annual 3% salary increases until age 54 and annual 1.5% increases from age 55 to retirement, based on <a href="https://www.frbatlanta.org/chcs/wage-growth-tracker">historical wage growth</a>. Following the <a href="https://www.cnbc.com/2019/06/18/rick-santellis-5-things-you-need-to-know-about-investing-in-bonds.html">"60-40 rule,"</a>annual growth is based on a portfolio made up of 60% stocks and 40% bonds.  Rates used for annual growth are: 6.4% (conservative), 7.4% (average), and 8.4% (optimistic), based on <a href="https://www.morningstar.com/articles/907378/experts-forecast-long-term-stock-and-bond-returns-2019-edition">long-term historical returns</a>, and are compounded monthly. This annual growth is calculated until retirement age. During retirement, rate of return used is 4% to account for a more conservative portfolio. Social Security and pension payments are not factored into the results. Selected retirement ages are based on <a href="https://www.ssa.gov/planners/retire/agereduction.html">Social Security milestones</a>. The age of 50 is included to allow for a greater range of results. Results are based on a life expectancy of 90.
+        <b>Notes:</b>  This calculator makes a few estimates for future earnings and growth. It assumes annual 3% salary increases until age 54 and annual 1.5% increases from age 55 to retirement, based on <a href="https://www.frbatlanta.org/chcs/wage-growth-tracker">historical wage growth</a>. Following the <a href="https://www.cnbc.com/2019/06/18/rick-santellis-5-things-you-need-to-know-about-investing-in-bonds.html">"60-40 rule,"</a> annual growth is based on a portfolio made up of 60% stocks and 40% bonds.  Rates used for annual growth are: 6.4% (conservative), 7.4% (average), and 8.4% (optimistic), based on <a href="https://www.morningstar.com/articles/907378/experts-forecast-long-term-stock-and-bond-returns-2019-edition">long-term historical returns</a>, and are compounded monthly. This annual growth is calculated until retirement age. During retirement, rate of return used is 4% to account for a more conservative portfolio. Social Security and pension payments are not factored into the results. Selected retirement ages are based on <a href="https://www.ssa.gov/planners/retire/agereduction.html">Social Security milestones</a>. The age of 50 is included to allow for a greater range of results. Results are based on a life expectancy of 90.
     </p>
 
   </div>
